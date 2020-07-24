@@ -3,20 +3,32 @@ import { first } from 'rxjs/operators';
 
 import { User } from '../_models/user';
 import { UserService} from '../_services/user.service';
-import {AuthenticationService} from '@app/_services/authentication.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '@environments/environment';
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({ templateUrl: 'home.component.html',
+             styleUrls: ['home.component.css']})
 export class HomeComponent {
-    loading = false;
-    users: User[];
+  title = "Demo GRid";
+  columnDefs = [
+    { headerName: "ID", field: "id", width: 80, sortable: true },
+    { headerName: "First Name", field: "first_name" },
+    { headerName: "Last Name", field: "last_name" },
+    { headerName: "Middle Name", field: "middle_name"},
+    { headerName: "Email", field: "email"},
+    { headerName: "Position Name", field: "position_name", sortable: true}
 
-    constructor(private userService: UserService) { }
 
-    ngOn0Init() {
-        this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.loading = false;
-            this.users = users;
-        });
-    }
+  ];
+
+  rowData: any;
+
+  constructor(private http: HttpClient){}
+
+  ngOnInit(){
+    this.rowData = this.http.get(`${environment.apiUrl}/api/profile/`);
+  }
+
+  
+  
 }

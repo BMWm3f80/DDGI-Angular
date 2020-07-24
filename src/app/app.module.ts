@@ -2,25 +2,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// used to create fake backend
-// import { fakeBackendProvider } from './_helpers';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { LoginComponent } from './login/login.component';
 import {HomeComponent} from '@app/home/home.component';
+import {AgGridModule} from 'ag-grid-angular';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        AppRoutingModule,
         HttpClientModule,
-        AppRoutingModule
+        AgGridModule.withComponents([])
     ],
     declarations: [
         AppComponent,
