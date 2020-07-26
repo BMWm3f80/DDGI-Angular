@@ -16,7 +16,9 @@ export class HomeComponent {
     { headerName: "Last Name", field: "last_name" },
     { headerName: "Middle Name", field: "middle_name"},
     { headerName: "Email", field: "email"},
-    { headerName: "Position Name", field: "position_name", sortable: true}
+    { headerName: "Position Name", field: "position_name", sortable: true},
+    { headerName: "Active", field: "is_active"},
+    { headerName: "Last Login", field: "last_login"}
 
 
   ];
