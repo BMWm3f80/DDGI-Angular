@@ -1,4 +1,6 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '@app/_services/authentication.service';
 
 @Component({
   selector: 'app-main',
@@ -7,11 +9,19 @@ import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   public sidebarMenuOpened = true;
-  @ViewChild('contentWrapper', { static: false }) contentWrapper;
+  @ViewChild('contentWrapper', {static: false}) contentWrapper;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private router: Router, private authenticationService: AuthenticationService) {
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit() {
+
     this.renderer.removeClass(document.querySelector('app-root'), 'login-page');
     this.renderer.removeClass(
       document.querySelector('app-root'),
@@ -28,7 +38,6 @@ export class MainComponent implements OnInit {
   }
 
   toggleMenuSidebar() {
-    console.log('sidebarMenuCollapsed', this.sidebarMenuOpened);
     if (this.sidebarMenuOpened) {
       this.renderer.removeClass(
         document.querySelector('app-root'),

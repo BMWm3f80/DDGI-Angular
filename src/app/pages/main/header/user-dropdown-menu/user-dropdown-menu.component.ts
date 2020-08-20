@@ -6,7 +6,10 @@ import {
   ElementRef,
   Renderer2,
 } from '@angular/core';
-import { AppService } from 'src/app/utils/services/app.service';
+import {AppService} from 'src/app/utils/services/app.service';
+import {AuthenticationService} from '@app/_services/authentication.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-user-dropdown-menu',
@@ -16,7 +19,8 @@ import { AppService } from 'src/app/utils/services/app.service';
 export class UserDropdownMenuComponent implements OnInit {
   public user;
 
-  @ViewChild('dropdownMenu', { static: false }) dropdownMenu;
+  @ViewChild('dropdownMenu', {static: false}) dropdownMenu;
+
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -27,8 +31,11 @@ export class UserDropdownMenuComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private appService: AppService
-  ) {}
+    private appService: AppService,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.user = this.appService.user;
@@ -51,6 +58,7 @@ export class UserDropdownMenuComponent implements OnInit {
   }
 
   logout() {
-    this.appService.logout();
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

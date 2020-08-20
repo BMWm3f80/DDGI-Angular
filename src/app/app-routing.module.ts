@@ -8,6 +8,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AuthGuard } from './utils/guards/auth.guard';
 import { NonAuthGuard } from './utils/guards/non-auth.guard';
+import {UserlistComponent} from '@app/userlist/userlist.component';
+import {PermissionlistComponent} from '@app/permissionlist/permissionlist.component';
+import {TestlistComponent} from '@app/testlist/testlist.component';
+import {IndividualClientComponent} from '@app/client/individual-client/individual-client.component';
 
 const routes: Routes = [
   {
@@ -21,6 +25,10 @@ const routes: Routes = [
         component: ProfileComponent,
       },
       {
+        path: 'permission',
+        component: PermissionlistComponent
+      },
+      {
         path: 'blank',
         component: BlankComponent,
       },
@@ -28,6 +36,19 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
       },
+      {
+        path: 'client-individual',
+        component: IndividualClientComponent
+      },
+      {
+        path: 'users',
+        component: UserlistComponent,
+      },
+      {
+        path: 'test',
+        component: TestlistComponent,
+      },
+
     ],
   },
   {
